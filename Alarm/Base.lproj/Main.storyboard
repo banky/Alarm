@@ -49,10 +49,10 @@
             </objects>
             <point key="canvasLocation" x="1192" y="290"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Alarm View Controller-->
         <scene sceneID="72W-u0-NK8">
             <objects>
-                <viewController id="Uwk-nd-8TX" sceneMemberID="viewController">
+                <viewController id="Uwk-nd-8TX" customClass="AddAlarmViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lDT-Ju-Ot3"/>
                         <viewControllerLayoutGuide type="bottom" id="EvK-g9-CvR"/>
@@ -77,10 +77,16 @@
                                 <state key="normal" title="Add!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="addLocation:" destination="Uwk-nd-8TX" eventType="touchUpInside" id="Hny-cB-iJD"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="locationName" destination="HSX-0w-Kz6" id="cRv-Ew-WbR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M2o-Dd-hHM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

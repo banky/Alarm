@@ -14,6 +14,10 @@
 		B1B57DDD1B210C3F00FF2EB8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1B57DDC1B210C3F00FF2EB8 /* Images.xcassets */; };
 		B1B57DE01B210C3F00FF2EB8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1B57DDE1B210C3F00FF2EB8 /* LaunchScreen.xib */; };
 		B1B57DEC1B210C3F00FF2EB8 /* AlarmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B57DEB1B210C3F00FF2EB8 /* AlarmTests.m */; };
+		B1B57DF81B22490B00FF2EB8 /* AddAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B57DF71B22490B00FF2EB8 /* AddAlarmViewController.m */; };
+		B1B57DFB1B224B9C00FF2EB8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1B57DFA1B224B9C00FF2EB8 /* CoreLocation.framework */; };
+		B1B57DFD1B233F8500FF2EB8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B1B57DFC1B233F8500FF2EB8 /* libsqlite3.dylib */; };
+		B1B57E001B2340B300FF2EB8 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B57DFF1B2340B300FF2EB8 /* DBManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +44,12 @@
 		B1B57DE51B210C3F00FF2EB8 /* AlarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1B57DEA1B210C3F00FF2EB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1B57DEB1B210C3F00FF2EB8 /* AlarmTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmTests.m; sourceTree = "<group>"; };
+		B1B57DF61B22490B00FF2EB8 /* AddAlarmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAlarmViewController.h; sourceTree = "<group>"; };
+		B1B57DF71B22490B00FF2EB8 /* AddAlarmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAlarmViewController.m; sourceTree = "<group>"; };
+		B1B57DFA1B224B9C00FF2EB8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B1B57DFC1B233F8500FF2EB8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		B1B57DFE1B2340B300FF2EB8 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		B1B57DFF1B2340B300FF2EB8 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1B57DFD1B233F8500FF2EB8 /* libsqlite3.dylib in Frameworks */,
+				B1B57DFB1B224B9C00FF2EB8 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +75,8 @@
 		B1B57DC31B210C3F00FF2EB8 = {
 			isa = PBXGroup;
 			children = (
+				B1B57DFC1B233F8500FF2EB8 /* libsqlite3.dylib */,
+				B1B57DFA1B224B9C00FF2EB8 /* CoreLocation.framework */,
 				B1B57DCE1B210C3F00FF2EB8 /* Alarm */,
 				B1B57DE81B210C3F00FF2EB8 /* AlarmTests */,
 				B1B57DCD1B210C3F00FF2EB8 /* Products */,
@@ -83,12 +97,16 @@
 			children = (
 				B1B57DD31B210C3F00FF2EB8 /* AppDelegate.h */,
 				B1B57DD41B210C3F00FF2EB8 /* AppDelegate.m */,
+				B1B57DF61B22490B00FF2EB8 /* AddAlarmViewController.h */,
+				B1B57DF71B22490B00FF2EB8 /* AddAlarmViewController.m */,
 				B1B57DD61B210C3F00FF2EB8 /* ViewController.h */,
 				B1B57DD71B210C3F00FF2EB8 /* ViewController.m */,
 				B1B57DD91B210C3F00FF2EB8 /* Main.storyboard */,
 				B1B57DDC1B210C3F00FF2EB8 /* Images.xcassets */,
 				B1B57DDE1B210C3F00FF2EB8 /* LaunchScreen.xib */,
 				B1B57DCF1B210C3F00FF2EB8 /* Supporting Files */,
+				B1B57DFE1B2340B300FF2EB8 /* DBManager.h */,
+				B1B57DFF1B2340B300FF2EB8 /* DBManager.m */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -220,9 +238,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1B57DF81B22490B00FF2EB8 /* AddAlarmViewController.m in Sources */,
 				B1B57DD81B210C3F00FF2EB8 /* ViewController.m in Sources */,
 				B1B57DD51B210C3F00FF2EB8 /* AppDelegate.m in Sources */,
 				B1B57DD21B210C3F00FF2EB8 /* main.m in Sources */,
+				B1B57E001B2340B300FF2EB8 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +439,7 @@
 				B1B57DF11B210C3F00FF2EB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B1B57DF21B210C3F00FF2EB8 /* Build configuration list for PBXNativeTarget "AlarmTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +448,7 @@
 				B1B57DF41B210C3F00FF2EB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
