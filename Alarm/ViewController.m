@@ -7,8 +7,13 @@
 //
 
 #import "ViewController.h"
+#import "DBManager.h"
 
 @interface ViewController () //<UITableViewDelegate>
+
+@property (nonatomic, strong) DBManager *dbManager;
+
+@property (nonatomic, strong) NSArray *arrPeopleInfo;
 
 @end
 
@@ -18,6 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     //self.tableView.delegate = self;
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"locationsDatabase.sql"];
     
 }
 
@@ -43,5 +49,19 @@
 
     cell.textLabel.text = [NSString stringWithFormat:@"%li", (long)indexPath.row];
     return cell;
+}
+
+-(void)loadData{
+    // Form the query.
+    NSString *query = @"select * from peopleInfo";
+    
+    // Get the results.
+    if (self.arrPeopleInfo != nil) {
+        self.arrPeopleInfo = nil;
+    }
+    self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
+    // Reload the table view.
+    [self.tableView reloadData];
 }
 @end

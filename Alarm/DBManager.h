@@ -17,6 +17,7 @@
 @property (nonatomic) long long lastInsertedRowID;
 
 -(void)copyDatabaseIntoDocumentsDirectory;
+
 -(instancetype)initWithDatabaseFilename:(NSString *)dbFilename;
 
 -(NSArray *)loadDataFromDB:(NSString *)query;
