@@ -58,7 +58,7 @@
         NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
         
         // Pop the view controller.
-        [self displayMessage:@"Success!!!" description:@"The location was successfully saved to the database 😄"];
+        [self displayMessage:@"Success!!!" description:@"The location was found and successfully saved to the database 😄"];
     }
     else{
         NSLog(@"Could not execute the query.");

@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>privacy - location usage description</key>
+	<string>Used to wake you up</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Used to wake you up</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Used to wake you up</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

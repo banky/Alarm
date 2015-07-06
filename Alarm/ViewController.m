@@ -9,15 +9,20 @@
 #import "ViewController.h"
 #import "DBManager.h"
 #import <CoreLocation/CoreLocation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
+//About 10 kilometers from the location received from Google
+#define radius 10000
 
 @interface ViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) DBManager *dbManager;
 
-@property (nonatomic, strong) NSArray *arrPeopleInfo;
+@property (nonatomic, strong) NSArray *arrLocationInfo;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
+
+@property (nonatomic, strong) CLLocation *userCurrentLocation;
 
 @end
 
@@ -33,11 +38,11 @@
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     [self.locationManager requestAlwaysAuthorization];
-    self.locationManager.pausesLocationUpdatesAutomatically = YES;
+    //self.locationManager.pausesLocationUpdatesAutomatically = YES;
     
     
     //TODO: Find a better way to do this
-    [self.locationManager startMonitoringSignificantLocationChanges];
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -49,12 +54,33 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    NSLog(@"location updating");
+    self.userCurrentLocation = [locations lastObject];
+
+    NSInteger indexOfLatitude = [self.dbManager.arrColumnNames indexOfObject:@"latitude"];
+    NSInteger indexOfLongitude = [self.dbManager.arrColumnNames indexOfObject:@"longitude"];
+    
+    for (int i = 0; i < self.arrLocationInfo.count; i++) {
+        CLLocationDegrees latitude = [[[self.arrLocationInfo objectAtIndex:i] objectAtIndex:indexOfLatitude] doubleValue];
+        CLLocationDegrees longitude = [[[self.arrLocationInfo objectAtIndex:i] objectAtIndex:indexOfLongitude] doubleValue];
+        CLLocation *destination = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+        
+        //Check every destination to see if the user has arrived at one of them
+        if ([self.userCurrentLocation distanceFromLocation:destination] <= radius) {
+            NSLog(@"here");
+            //AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        }
+    }
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrPeopleInfo.count;
+    return self.arrLocationInfo.count;
 }
 
 - (BOOL) tableView:(UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -66,7 +92,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the selected record.
         // Find the record ID.
-        int recordIDToDelete = [[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
+        int recordIDToDelete = [[[self.arrLocationInfo objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
         
         // Prepare the query.
         NSString *query = [NSString stringWithFormat:@"delete from userLocations where userLocationID=%d", recordIDToDelete];
@@ -89,16 +115,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:tableIdentifier];
     }
     
-    //if (self.arrPeopleInfo[indexPath.row][3]) {
-        //cell.textLabel.text = [NSString stringWithFormat:@"%@", self.arrPeopleInfo[indexPath.row]];
+
     NSInteger indexOfCity = [self.dbManager.arrColumnNames indexOfObject:@"city"];
-    NSLog(@"indexpath.row: %ld", (long)indexPath.row);
-    cell.textLabel.text = [[self.arrPeopleInfo objectAtIndex:(indexPath.row)] objectAtIndex:indexOfCity];
+   
+    cell.textLabel.text = [[self.arrLocationInfo objectAtIndex:(indexPath.row)] objectAtIndex:indexOfCity];
     
-    //[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]
-    //} else {
-    //    cell.textLabel.text = @"Could not get";
-    //}
     return cell;
 }
 
@@ -107,12 +128,12 @@
     NSString *query = @"select * from userLocations";
     
     // Get the results.
-    if (self.arrPeopleInfo != nil) {
-        self.arrPeopleInfo = nil;
+    if (self.arrLocationInfo != nil) {
+        self.arrLocationInfo = nil;
     }
-    self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    self.arrLocationInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
-    if (self.arrPeopleInfo.count == 0) {
+    if (self.arrLocationInfo.count == 0) {
         [self.tableView setHidden:YES];
     } else {
         [self.tableView setHidden:NO];
@@ -120,5 +141,6 @@
     
     // Reload the table view.
     [self.tableView reloadData];
+
 }
 @end
