@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B1945E121B46CCBC0099192C /* locationsDatabase.sql in Resources */ = {isa = PBXBuildFile; fileRef = B1945E111B46CCBC0099192C /* locationsDatabase.sql */; };
+		B1945E141B46D4240099192C /* locationsDatabase.sql in Resources */ = {isa = PBXBuildFile; fileRef = B1945E131B46D4240099192C /* locationsDatabase.sql */; };
 		B1B57DD21B210C3F00FF2EB8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B57DD11B210C3F00FF2EB8 /* main.m */; };
 		B1B57DD51B210C3F00FF2EB8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B57DD41B210C3F00FF2EB8 /* AppDelegate.m */; };
 		B1B57DD81B210C3F00FF2EB8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B57DD71B210C3F00FF2EB8 /* ViewController.m */; };
@@ -32,7 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B1945E111B46CCBC0099192C /* locationsDatabase.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = locationsDatabase.sql; sourceTree = "<group>"; };
+		B1945E131B46D4240099192C /* locationsDatabase.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = locationsDatabase.sql; sourceTree = "<group>"; };
 		B1B57DCC1B210C3F00FF2EB8 /* Alarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1B57DD01B210C3F00FF2EB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1B57DD11B210C3F00FF2EB8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		B1B57DCF1B210C3F00FF2EB8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B1945E111B46CCBC0099192C /* locationsDatabase.sql */,
+				B1945E131B46D4240099192C /* locationsDatabase.sql */,
 				B1B57DD01B210C3F00FF2EB8 /* Info.plist */,
 				B1B57DD11B210C3F00FF2EB8 /* main.m */,
 			);
@@ -190,6 +190,11 @@
 					B1B57DCB1B210C3F00FF2EB8 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 927X52RYXV;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					B1B57DE41B210C3F00FF2EB8 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -221,7 +226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1945E121B46CCBC0099192C /* locationsDatabase.sql in Resources */,
+				B1945E141B46D4240099192C /* locationsDatabase.sql in Resources */,
 				B1B57DDB1B210C3F00FF2EB8 /* Main.storyboard in Resources */,
 				B1B57DE01B210C3F00FF2EB8 /* LaunchScreen.xib in Resources */,
 				B1B57DDD1B210C3F00FF2EB8 /* Images.xcassets in Resources */,

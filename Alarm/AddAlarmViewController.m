@@ -50,7 +50,7 @@
 }
 
 - (void)saveInfo:(CLLocation *)userLocation {
-    NSString *query = [NSString stringWithFormat:@"insert into userLocations values(null, %f, %f);", userLocation.coordinate.latitude, userLocation.coordinate.longitude];
+    NSString *query = [NSString stringWithFormat:@"insert into userLocations values(null, %f, %f, '%@');", userLocation.coordinate.latitude, userLocation.coordinate.longitude, location];
     NSLog(@"Query: %@", query);
     [self.dbManager executeQuery:query];
     // If the query was successfully executed then pop the view controller.
