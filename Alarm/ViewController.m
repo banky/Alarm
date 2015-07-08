@@ -31,7 +31,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    //self.tableView.delegate = self;
+    
+    //[[UINavigationBar appearance]setBackgroundColor:[UIColor greenColor]];//[UIColor colorWithRed:217 green:81 blue:81 alpha:1]];
+    //self.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:217 green:81 blue:81 alpha:1];
+    
+    
+    
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"locationsDatabase.sql"];
     [self loadData];
     self.locationManager = [[CLLocationManager alloc] init];
@@ -123,6 +128,13 @@
     return cell;
 }
 
+- (void)tableView:(UITableView*)tableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //NSLog(@"%ld", (long)indexPath.row);
+    
+    
+    [tableview deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 -(void)loadData{
     // Form the query.
     NSString *query = @"select * from userLocations";
@@ -143,4 +155,13 @@
     [self.tableView reloadData];
 
 }
+
+- (void)pushDestinationView: (NSIndexPath*)indexPath{
+    NSInteger indexOfLatitude = [self.dbManager.arrColumnNames indexOfObject:@"latitude"];
+    NSInteger indexOfLongitude = [self.dbManager.arrColumnNames indexOfObject:@"longitude"];
+    
+    
+    
+}
+
 @end
