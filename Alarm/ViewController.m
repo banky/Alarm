@@ -30,13 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    
-    //[[UINavigationBar appearance]setBackgroundColor:[UIColor greenColor]];//[UIColor colorWithRed:217 green:81 blue:81 alpha:1]];
-    //self.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:217 green:81 blue:81 alpha:1];
-    
-    
-    
+
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"locationsDatabase.sql"];
     [self loadData];
     self.locationManager = [[CLLocationManager alloc] init];
@@ -45,9 +39,11 @@
     [self.locationManager requestAlwaysAuthorization];
     //self.locationManager.pausesLocationUpdatesAutomatically = YES;
     
-    
     //TODO: Find a better way to do this
     [self.locationManager startUpdatingLocation];
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

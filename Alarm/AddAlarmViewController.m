@@ -26,6 +26,7 @@
     [super viewDidLoad];
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"locationsDatabase.sql"];
     // Do any additional setup after loading the view.
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,14 +42,29 @@
         return;
     }
     
-    //Store the location that the user entered
-    CLLocationDegrees latitude = [locationResults[0][@"geometry"][@"location"][@"lat"] doubleValue];
-    CLLocationDegrees longitude = [locationResults[0][@"geometry"][@"location"][@"lng"] doubleValue];
-    NSLog(@"Longitude: %f", longitude);
-    CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-    [self saveInfo:userLocation];
+    if ([self check_if_location_is_a_city:locationResults]) {
+        //Store the location that the user entered
+        CLLocationDegrees latitude = [locationResults[0][@"geometry"][@"location"][@"lat"] doubleValue];
+        CLLocationDegrees longitude = [locationResults[0][@"geometry"][@"location"][@"lng"] doubleValue];
+        NSLog(@"Longitude: %f", longitude);
+        CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+        [self saveInfo:userLocation];
+    } else {
+        [self displayMessage:@"OOPS" description:@"It seems the location you entered is not a city"];
+    }
 }
 
+- (BOOL)check_if_location_is_a_city: (NSArray*) locations {
+    //Here we check if the location entered is recognized as a political location
+    BOOL isLocationACity = NO;
+    for (int i = 0; i < [locations[0][@"address_components"][0][@"types"] count]; i++) {
+        if ([[locations[0][@"address_components"][0][@"types"] objectAtIndex:i]  isEqual:@"political"]) {
+            isLocationACity = YES;
+        }
+    }
+    
+    return isLocationACity;
+}
 - (void)saveInfo:(CLLocation *)userLocation {
     NSString *query = [NSString stringWithFormat:@"insert into userLocations values(null, %f, %f, '%@');", userLocation.coordinate.latitude, userLocation.coordinate.longitude, location];
     NSLog(@"Query: %@", query);
